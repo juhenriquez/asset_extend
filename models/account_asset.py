@@ -6,8 +6,8 @@ class AssetAccount(models.Model):
 
     code1=fields.Char(related="prefix.code",store=True)
     code_2=fields.Char(related="prefix.code1",store=True)
-    r_dep=fields.Char(string='Departamento responsable')
-    a_ub=fields.Char(string="Area de ubicación")
+    r_dep=fields.Many2one("departamento",string='Departamento responsable')
+    a_ub=fields.Many2one("ubicacion",string="Area de ubicación")
     comment1=fields.Char(string='Comentario')
     f_asset=fields.Char(string="Familia de activos")
     gen_codigo=fields.Char(string="Generacion codigo", default=lambda self: _('New'))
@@ -43,4 +43,13 @@ class AssetAccount(models.Model):
         res=super(AssetAccount, self).create(vals)
         return res
 
+class Ubicacion(models.Model):
+    _name = "ubicacion"
+
+    name=fields.Char("Nombre")
+
+class Departamentp(models.Model):
+    _name = "departamento"
+
+    name=fields.Char("Nombre")
  
